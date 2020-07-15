@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "@reach/router";
 
 const AllProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -9,6 +10,7 @@ const AllProducts = (props) => {
       .get("http://localhost:8000/api/products")
       .then((res) => {
         setProducts(res.data);
+        getProductsAPI();
       })
       .catch((err) => {
         console.log(err);
@@ -20,21 +22,23 @@ const AllProducts = (props) => {
   }, [props]);
 
   return (
-    <div className="container">
+    <div>
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
+            <th>#</th>
             <th>Title</th>
-            <th>Price</th>
-            <th>Description</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product._id}>
-              <th scope="row">{product.title}</th>
-              <td>{product.price}</td>
-              <td>{product.description}</td>
+          {products.map((product, i) => (
+            <tr key={i}>
+              <th scope="row">{i}</th>
+              <td>{product.title}</td>
+              <td>
+                <Link to={`/products/${product._id}`}> View </Link>
+              </td>
             </tr>
           ))}
         </tbody>
