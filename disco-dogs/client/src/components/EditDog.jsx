@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { navigate } from '@reach/router';
 
-const NewDog = (props) => {
+const EditDog = (props) => {
 	const [ name, setName ] = useState('');
 	const [ breed, setBreed ] = useState('');
 	const [ age, setAge ] = useState(1);
 	const [ errors, setErrors ] = useState({});
 
-	const addDog = (e) => {
+	const editDog = (e) => {
 		e.preventDefault();
 		const dog = {
 			name,
@@ -30,7 +30,7 @@ const NewDog = (props) => {
 	return (
 		<div className="container">
 			<h1> Form </h1>{' '}
-			<form onSubmit={addDog}>
+			<form onSubmit={editDog}>
 				<div className="form-group">
 					<label> Name: </label>{' '}
 					<input
@@ -69,4 +69,4 @@ const NewDog = (props) => {
 	);
 };
 
-export default NewDog;
+export default EditDog;

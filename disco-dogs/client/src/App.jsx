@@ -1,34 +1,37 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Router, Link } from "@reach/router";
-import AllDogs from "./components/AllDogs";
-import NewDog from "./components/NewDog";
-
-const buttonStyle = {
-  marginLeft: "10px",
-};
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Router, Link } from '@reach/router';
+import AllDogs from './components/AllDogs';
+import NewDog from './components/NewDog';
+import EditDog from './components/EditDog';
 
 function App() {
-  return (
-    <div className="container-fluid">
-      <h1>Disco Dawgs</h1>
-      <nav>
-        <Link to="/">
-          <button className="btn btn-primary">Home</button>
-        </Link>
-        <Link to="/new">
-          <button className="btn btn-primary" style={buttonStyle}>
-            New Dog
-          </button>
-        </Link>
-      </nav>
+	const [ active, setActive ] = useState('Home');
 
-      <Router>
-        <AllDogs path="/" />
-        <NewDog path="/new" />
-      </Router>
-    </div>
-  );
+	return (
+		<div className="container-fluid">
+			<div className="jumbotron bg-light text-dark">
+				<h1> Disco Dawgs </h1>{' '}
+			</div>{' '}
+			<ul className="nav nav-tabs mb-5">
+				<li className="nav-item" onClick={(e) => setActive('/')}>
+					<Link className={active === '/' ? 'nav-link active' : 'nav-link'} to="/">
+						Home
+					</Link>
+				</li>
+				<li className="nav-item" onClick={(e) => setActive('/new')}>
+					<Link className={active === '/' ? 'nav-link active' : 'nav-link'} to="/new">
+						Add Dog
+					</Link>
+				</li>
+			</ul>
+			<Router>
+				<AllDogs path="/" />
+				<NewDog path="/new" />
+				<EditDog path="/edit/:_id" />
+			</Router>{' '}
+		</div>
+	);
 }
 
 export default App;
