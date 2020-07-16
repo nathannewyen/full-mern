@@ -1,25 +1,20 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
 import Form from "./components/Form";
 import AllProducts from "./components/AllProducts";
 import Product from "./components/Product";
-
-const test = {
-  fontSize: "16px",
-};
+import EditProduct from "./components/EditProduct";
 
 function App() {
   return (
-    <div className="App container">
+    <div className="App container-fluid">
       <h1 className="text-center">Product Manager</h1>
       <AllProducts />
-      <Link to="/new" className="btn btn-primary">
-        Add Product
-      </Link>
       <Router>
         <Form path="/new" />
         <Product path="/products/:id" />
+        <EditProduct path="/edit/:id" />
       </Router>
     </div>
   );

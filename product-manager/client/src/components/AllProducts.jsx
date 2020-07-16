@@ -4,7 +4,6 @@ import { Link } from "@reach/router";
 
 const AllProducts = (props) => {
   const [products, setProducts] = useState([]);
-
   const getProductsAPI = () => {
     axios
       .get("http://localhost:8000/api/products")
@@ -18,11 +17,11 @@ const AllProducts = (props) => {
   };
 
   useEffect(() => {
-    getProductsAPI();
+    getProductsAPI(); // eslint-disable-next-line
   }, [props]);
 
   return (
-    <div>
+    <div className="container">
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
@@ -37,12 +36,18 @@ const AllProducts = (props) => {
               <th scope="row">{i}</th>
               <td>{product.title}</td>
               <td>
-                <Link to={`/products/${product._id}`}> View </Link>
+                <Link to={`/products/${product._id}`}>View</Link>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Link to="/" className="btn btn-primary">
+        Home
+      </Link>{" "}
+      <Link to="/new" className="btn btn-primary">
+        Add Product
+      </Link>
     </div>
   );
 };
